@@ -34,21 +34,18 @@ fileFilter.prototype.filter = function(text, className) {
 
 
 $(document).ready(function(){
-  if($('body.resources').length) {
+  var f = new fileFilter($('.project'), $('.mobile-select'));
+  var hash = window.location.href.split('#')[1]
 
-    var f = new fileFilter($('.project'), $('.mobile-select'));
-    var hash = window.location.href.split('#')[1]
-
-    if(hash != undefined){
-      f.filter($("." + hash).html(), hash);
-    }
-
-    $('.sorts a').on("click", function(e){
-      f.filter($(this).html(), $(this).attr("class"));
-    });
-
-    f.select.on("change", function(e){
-      f.filter($(this).find('option:selected').text(), $(this).val());
-    });
+  if(hash != undefined){
+    f.filter($("." + hash).html(), hash);
   }
+
+  $('.sorts a').on("click", function(e){
+    f.filter($(this).html(), $(this).attr("class"));
+  });
+
+  f.select.on("change", function(e){
+    f.filter($(this).find('option:selected').text(), $(this).val());
+  });
 });
